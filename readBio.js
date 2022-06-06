@@ -1,12 +1,12 @@
 const fs = require('fs');
 process.stdin.setEncoding('utf8');
-const bioData = {};
 
 const addHobbies = bioData => {
   console.log('Please enter your hobbies');
   process.stdin.on('data', chunk => {
-    bioData.hobbies = +chunk.split(',');
+    bioData.hobbies = chunk.trim().split(',');
     fs.writeFileSync('bioData.json', JSON.stringify(bioData), 'utf8');
+    console.log('Thank You');
   });
 };
 
@@ -19,8 +19,9 @@ const addAge = bioData => {
   });
 };
 
-const addName = (bioData) => {
+const addName = () => {
   console.log('Please enter your name');
+  const bioData = {};
   process.stdin.on('data', chunk => {
     bioData.name = chunk.trim();
     process.stdin.removeAllListeners('data');
@@ -28,4 +29,4 @@ const addName = (bioData) => {
   });
 };
 
-addName(bioData);
+addName();
